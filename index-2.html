@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>for my baby</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0908;
+    --bg2:#0d0b0a;
+    --ink:#efe6d8;
+    --ink-dim:#b9ab97;
+    --burgundy:#3a1420;
+    --burgundy-glow:rgba(150,55,70,0.35);
+    color-scheme: dark;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0;padding:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'EB Garamond', Georgia, serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    scroll-padding-top:env(safe-area-inset-top,0px);
+  }
+  body{
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  /* grain overlay */
+  .grain{
+    position:fixed;inset:0;pointer-events:none;z-index:50;
+    opacity:0.05;mix-blend-mode:overlay;
+  }
+  /* vignette */
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+    background:radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%);
+  }
+
+  section{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 8vh 7vw;
+    z-index:2;
+  }
+
+  /* ---------- Opening ---------- */
+  #opening{ gap:2.4rem; }
+  .whisper{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-style:italic;
+    font-size:clamp(1.3rem,4vw,1.9rem);
+    color:var(--ink-dim);
+    opacity:0;
+    letter-spacing:0.02em;
+    animation:softIn 2.5s ease forwards;
+    animation-delay:0.3s;
+  }
+  .title-main{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:400;
+    font-size:clamp(2rem,7vw,3.4rem);
+    line-height:1.25;
+    opacity:0;
+    text-shadow:0 0 40px var(--burgundy-glow);
+    animation:softIn 2.8s ease forwards;
+    animation-delay:3.2s;
+    max-width:14ch;
+  }
+  .sub-line{
+    font-size:clamp(1rem,3vw,1.2rem);
+    color:var(--ink-dim);
+    max-width:26ch;
+    line-height:1.7;
+    opacity:0;
+    animation:softIn 2.2s ease forwards;
+    animation-delay:5.6s;
+  }
+  .enter-btn{
+    opacity:0;
+    animation:softIn 2s ease forwards;
+    animation-delay:7.2s;
+    background:none;
+    border:1px solid rgba(239,230,216,0.25);
+    color:var(--ink);
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    font-size:1.05rem;
+    padding:0.85rem 1.9rem;
+    border-radius:999px;
+    cursor:pointer;
+    letter-spacing:0.02em;
+    transition:border-color 0.6s ease, box-shadow 0.6s ease, transform 0.3s ease;
+    margin-top:1rem;
+  }
+  .enter-btn:hover{
+    border-color:rgba(150,55,70,0.7);
+    box-shadow:0 0 30px var(--burgundy-glow);
+  }
+  .enter-btn:active{ transform:scale(0.97); }
+
+  @keyframes softIn{
+    from{ opacity:0; transform:translateY(10px); filter:blur(6px); }
+    to{ opacity:1; transform:translateY(0); filter:blur(0); }
+  }
+
+  /* ---------- Letter ---------- */
+  #letter{
+    align-items:center;
+    padding-top:14vh;
+    padding-bottom:14vh;
+    gap:0;
+  }
+  .letter-heading{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:400;
+    font-size:clamp(1.6rem,5vw,2.1rem);
+    color:var(--ink);
+    margin-bottom:14vh;
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity 1.6s ease, transform 1.6s ease, filter 1.6s ease;
+    filter:blur(6px);
+  }
+  .line{
+    font-size:clamp(1.15rem,3.4vw,1.5rem);
+    line-height:1.95;
+    color:var(--ink);
+    max-width:34ch;
+    margin:0 0 8vh 0;
+    opacity:0;
+    transform:translateY(18px);
+    filter:blur(6px);
+    transition:opacity 1.5s ease, transform 1.5s ease, filter 1.5s ease;
+  }
+  .line.small{
+    color:var(--ink-dim);
+    font-size:clamp(1rem,3vw,1.2rem);
+  }
+  .line.solo{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.4rem,4.2vw,1.9rem);
+    text-shadow:0 0 30px var(--burgundy-glow);
+  }
+  .line.visible, .letter-heading.visible{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+  .list-block{
+    max-width:30ch;
+    margin:0 0 8vh 0;
+  }
+  .list-block .line{ margin-bottom:0.9rem; }
+
+  /* ---------- Ending ---------- */
+  #ending{ gap:3rem; }
+  .end-line{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:clamp(1.4rem,4.5vw,2rem);
+    color:var(--ink-dim);
+    opacity:0;
+    transition:opacity 2.2s ease;
+  }
+  .end-title{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:400;
+    font-size:clamp(2rem,7vw,3rem);
+    opacity:0;
+    text-shadow:0 0 40px var(--burgundy-glow);
+    transition:opacity 2.2s ease;
+  }
+  .heart{
+    font-size:1.4rem;
+    color:var(--ink-dim);
+    opacity:0;
+    transition:opacity 2.5s ease;
+  }
+  .end-line.visible,.end-title.visible,.heart.visible{ opacity:1; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<svg class="grain" xmlns="http://www.w3.org/2000/svg">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)"/>
+</svg>
+
+<section id="opening">
+  <div class="title-main" style="animation-delay:0.4s;">happy daughter's&nbsp;day, babyyy</div>
+  <button class="enter-btn" id="enterBtn" style="animation-delay:2.6s;">read this →</button>
+</section>
+
+<section id="letter">
+  <div class="letter-heading">Happy Daughter's Day, to everyone's little princess.</div>
+
+  <p class="line">I wish I could sit next to you while you read this.</p>
+
+  <p class="line">Maybe today didn't feel the way a day meant to celebrate you should have felt. Maybe it passed quietly, like any other day. So before it ends, there's something I need you to hear — something you should never have to doubt.</p>
+
+  <p class="line solo">You are loved.</p>
+
+  <p class="line solo">You are so, so loved.</p>
+
+  <p class="line">Not just by me. By more people than you probably stop to count.</p>
+
+  <p class="line">You are a daughter — someone's little girl, even now, even on the days that feel ordinary.</p>
+
+  <p class="line">You are a friend — the one people call first with good news, and the one they call at 2am when something falls apart.</p>
+
+  <p class="line">You are someone's favorite person to sit next to, someone's reason to laugh harder than they meant to, someone a stranger remembers because you were kind to them on a hard day.</p>
+
+  <p class="line">You have probably been someone's reason to keep going more times than you'll ever know.</p>
+
+  <p class="line">Even if you're only mine, I can't help how wonderful you are — how you make the world better just by being in it, without even realizing it. Sometimes it feels like something divine came back down to earth, except this time it's living quietly inside you.</p>
+
+  <p class="line">You deserve to be celebrated — not because there's a day on the calendar for daughters, but simply because you are you.</p>
+
+  <p class="line">Somewhere in this world there's a girl whose existence has become such a huge part of my life. That still amazes me.</p>
+
+  <p class="line">You became someone I worry about, someone I miss, someone I want to protect. Someone whose smile can quietly change my whole day.</p>
+
+  <p class="line">Sometimes I wish you could see yourself the way I see you, even just for a moment.</p>
+
+  <p class="line small">Maybe then you'd understand why I think you deserve so much love.</p>
+
+  <div class="list-block">
+    <p class="line">You deserve softness.</p>
+    <p class="line">You deserve patience.</p>
+    <p class="line">You deserve to be held when you're tired.</p>
+    <p class="line">You deserve someone reminding you it will be okay.</p>
+    <p class="line">You deserve to feel wanted. Important. Special.</p>
+  </div>
+
+  <p class="line">And I hope I get to be one of the people who gives you that, again and again.</p>
+
+  <p class="line">Your family loves you more than they probably say out loud. You make this world a little better just by being in it — gentler, warmer, more worth showing up for.</p>
+
+  <p class="line">There's something almost sacred about the way you hold your family together, even without trying. And there's something sacred about the way you've made me feel, too — like something in me got quieter and better the day I met you.</p>
+
+  <p class="line">You are pure in a way that's rare. Not perfect — pure. The kind of good that doesn't perform, it just exists.</p>
+
+  <p class="line">I'd tell you on a random Tuesday. At 3 in the morning. In the middle of an argument. On the happiest day of my life, or the worst day of yours.</p>
+
+  <p class="line solo">I'd still tell you.</p>
+
+  <p class="line solo">You are my baby.</p>
+
+  <p class="line">And I hope that no matter how old you get, no matter how much life changes, some quiet part of you always knows — you deserve to be loved gently.</p>
+
+  <p class="line">Thank you for existing.</p>
+  <p class="line">Thank you for being exactly who you are.</p>
+  <p class="line">And thank you for letting me love you.</p>
+
+  <p class="line solo">Happy Daughter's Day, my pretty girl.</p>
+
+  <p class="line">When you close this page, I hope you carry one thing with you.</p>
+
+  <p class="line solo">You are loved more than you know. And you always will be.</p>
+
+  <p class="line">I love you, babyyy.</p>
+</section>
+
+<section id="ending">
+  <div class="end-line" data-fade>always your baby.</div>
+  <div class="end-title" data-fade>I love you.</div>
+  <div class="heart" data-fade>&#9825;</div>
+</section>
+
+<script>
+  const enterBtn = document.getElementById('enterBtn');
+  enterBtn.addEventListener('click', () => {
+    document.getElementById('letter').scrollIntoView({behavior:'smooth'});
+  });
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('visible'); }
+    });
+  },{ threshold:0.35 });
+
+  document.querySelectorAll('.line, .letter-heading').forEach(el=>io.observe(el));
+
+  // ending sequence: staggered fade once ending section is reached
+  const endEls = document.querySelectorAll('#ending [data-fade]');
+  const endIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        endEls.forEach((el,i)=>{
+          setTimeout(()=>el.classList.add('visible'), i*1600);
+        });
+        endIo.disconnect();
+      }
+    });
+  },{ threshold:0.5 });
+  endIo.observe(document.getElementById('ending'));
+</script>
+</body>
+</html>
